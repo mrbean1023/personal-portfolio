@@ -6,17 +6,17 @@ interface SectionHeadingProps {
   title: string;
 }
 
+/** Editorial section break: hairline, lowercase title left, number right. */
 export default function SectionHeading({ index, title }: SectionHeadingProps) {
   return (
     <Reveal>
-      <div className="mb-10 flex items-center gap-4">
-        <h2 className="flex items-baseline gap-3 font-mono text-2xl font-bold lowercase tracking-tight text-foreground sm:text-3xl">
-          <span className="text-base font-normal text-accent sm:text-lg">
-            {index}.
-          </span>
+      <div className="mb-12 flex items-baseline justify-between border-t border-border pt-5">
+        <h2 className="lowercase text-lg tracking-tight text-foreground sm:text-xl">
           {title}
         </h2>
-        <div className="h-px max-w-64 flex-1 bg-border" aria-hidden="true" />
+        <span className="text-xs text-faint" aria-hidden="true">
+          {index}
+        </span>
       </div>
     </Reveal>
   );

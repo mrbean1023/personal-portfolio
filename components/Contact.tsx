@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { CheckCircle2, Loader2, Mail, Send, TriangleAlert } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2, TriangleAlert } from "lucide-react";
 import { contact } from "@/data/portfolio";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
@@ -20,7 +20,7 @@ interface ContactFormValues {
 type SubmitStatus = "idle" | "sending" | "success" | "error";
 
 const inputClasses =
-  "w-full rounded-md border border-border bg-surface px-4 py-3 text-sm text-foreground placeholder:text-faint transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent";
+  "w-full border-0 border-b border-border bg-transparent px-0 py-2.5 text-sm text-foreground placeholder:text-faint transition-colors focus:border-accent focus:outline-none";
 
 export default function Contact() {
   const [status, setStatus] = useState<SubmitStatus>("idle");
@@ -50,27 +50,31 @@ export default function Contact() {
   });
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl scroll-mt-20 px-6 py-24">
+    <section id="contact" className="mx-auto max-w-5xl scroll-mt-20 px-6 py-20">
       <SectionHeading index="04" title={contact.heading} />
 
       <div className="grid gap-12 lg:grid-cols-5">
         <Reveal className="lg:col-span-2">
           <div>
-            <p className="leading-relaxed text-muted">{contact.blurb}</p>
+            <p className="text-sm leading-relaxed text-muted sm:text-base">
+              {contact.blurb}
+            </p>
             <a
               href={`mailto:${contact.email}`}
-              className="mt-6 inline-flex items-center gap-2 font-mono text-sm text-accent transition-colors hover:text-foreground"
+              className="mt-6 inline-block lowercase text-sm text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-foreground"
             >
-              <Mail className="h-4 w-4" />
               {contact.email}
             </a>
           </div>
         </Reveal>
 
         <Reveal className="lg:col-span-3" delay={0.1}>
-          <form onSubmit={onSubmit} noValidate className="space-y-5">
+          <form onSubmit={onSubmit} noValidate className="space-y-7">
             {/* Honeypot field — hidden from humans, catches naive bots */}
-            <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+            <div
+              className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+              aria-hidden="true"
+            >
               <label>
                 Company
                 <input
@@ -82,18 +86,18 @@ export default function Contact() {
               </label>
             </div>
 
-            <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid gap-7 sm:grid-cols-2">
               <div>
                 <label
                   htmlFor="contact-name"
-                  className="mb-1.5 block font-mono text-xs text-muted"
+                  className="mb-1 block lowercase text-xs text-faint"
                 >
-                  Name *
+                  name *
                 </label>
                 <input
                   id="contact-name"
                   type="text"
-                  placeholder="Ada Lovelace"
+                  placeholder="ada lovelace"
                   aria-invalid={Boolean(errors.name)}
                   className={inputClasses}
                   {...register("name", {
@@ -118,9 +122,9 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="contact-email"
-                  className="mb-1.5 block font-mono text-xs text-muted"
+                  className="mb-1 block lowercase text-xs text-faint"
                 >
-                  Email *
+                  email *
                 </label>
                 <input
                   id="contact-email"
@@ -147,14 +151,14 @@ export default function Contact() {
             <div>
               <label
                 htmlFor="contact-message"
-                className="mb-1.5 block font-mono text-xs text-muted"
+                className="mb-1 block lowercase text-xs text-faint"
               >
-                Message *
+                message *
               </label>
               <textarea
                 id="contact-message"
-                rows={6}
-                placeholder="Tell me about your project, role or idea…"
+                rows={5}
+                placeholder="tell me about your project, role or idea…"
                 aria-invalid={Boolean(errors.message)}
                 className={`${inputClasses} resize-y`}
                 {...register("message", {
@@ -176,22 +180,22 @@ export default function Contact() {
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-5 pt-1">
               <motion.button
                 type="submit"
                 disabled={status === "sending"}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-accent-soft hover:shadow-lg hover:shadow-accent/25 disabled:cursor-not-allowed disabled:opacity-60"
+                className="group inline-flex items-center gap-2 border border-accent px-6 py-2.5 lowercase text-sm text-accent transition-colors hover:bg-accent/10 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {status === "sending" ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    Sending…
+                    sending…
                   </>
                 ) : (
                   <>
-                    <Send className="h-4 w-4" />
-                    Send Message
+                    send message
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </>
                 )}
               </motion.button>
@@ -204,7 +208,7 @@ export default function Contact() {
                   role="status"
                 >
                   <CheckCircle2 className="h-4 w-4" />
-                  Message sent — thanks! I&apos;ll be in touch soon.
+                  message sent — thanks! i&apos;ll be in touch soon.
                 </motion.p>
               )}
 
@@ -216,7 +220,7 @@ export default function Contact() {
                   role="alert"
                 >
                   <TriangleAlert className="h-4 w-4" />
-                  Something went wrong — please email me directly instead.
+                  something went wrong — please email me directly instead.
                 </motion.p>
               )}
             </div>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, FileText } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { hero, socialLinks } from "@/data/portfolio";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import SocialIcon from "@/components/SocialIcon";
@@ -23,7 +23,7 @@ const container = {
 };
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
@@ -44,81 +44,69 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-svh flex-col justify-center overflow-hidden"
+      className="mx-auto flex min-h-svh w-full max-w-5xl flex-col justify-center px-6 pt-14"
     >
-      {/* Ambient accent glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-40 left-1/2 h-130 w-130 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
-      />
-
-      <motion.div
-        className="mx-auto w-full max-w-6xl px-6 pt-16"
-        variants={container}
-        initial="hidden"
-        animate="show"
-      >
-        <motion.p
-          variants={item}
-          className="mb-4 font-mono text-sm lowercase text-accent sm:text-base"
-        >
-          {greeting}, {hero.greeting}
-        </motion.p>
-
+      <motion.div variants={container} initial="hidden" animate="show">
         <motion.h1
           variants={item}
-          className="text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+          className="lowercase text-3xl leading-snug tracking-tight text-foreground sm:text-5xl sm:leading-snug"
         >
-          {hero.name}
-          <span className="text-accent">.</span>
+          <span className="text-muted">
+            {greeting}, {hero.greeting}{" "}
+          </span>
+          {hero.name.toLowerCase()}
+          <span className="text-accent">{" ✦"}</span>
         </motion.h1>
 
-        {/* Terminal-style typing subtitle */}
-        <motion.div
+        {/* Terminal-style typing line */}
+        <motion.p
           variants={item}
-          className="mt-6 inline-flex max-w-full items-center gap-3 rounded-lg border border-border bg-surface/60 px-4 py-3 font-mono text-sm text-muted shadow-lg shadow-black/20 sm:text-lg"
+          className="mt-8 text-sm text-foreground sm:text-base"
+          aria-live="polite"
         >
           <span className="select-none text-accent" aria-hidden="true">
-            ~$
+            ~${" "}
           </span>
-          <span className="truncate text-foreground" aria-live="polite">
-            {typed}
-            <span className="terminal-caret ml-0.5 inline-block h-[1.1em] w-[2px] translate-y-[0.2em] bg-accent" />
-          </span>
-        </motion.div>
+          {typed}
+          <span className="terminal-caret ml-0.5 inline-block h-[1.1em] w-[2px] translate-y-[0.2em] bg-accent" />
+        </motion.p>
 
         <motion.p
           variants={item}
-          className="mt-8 max-w-2xl text-base leading-relaxed text-muted sm:text-lg"
+          className="mt-8 max-w-xl text-sm leading-relaxed text-muted sm:text-base"
         >
           {hero.summary}
         </motion.p>
 
-        <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
+        <motion.div
+          variants={item}
+          className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4"
+        >
           <Link
             href={hero.primaryCta.href}
-            className="group inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-accent-soft hover:shadow-lg hover:shadow-accent/25"
+            className="group inline-flex items-center gap-2 lowercase text-sm text-foreground transition-colors hover:text-accent"
           >
             {hero.primaryCta.label}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
             href={hero.secondaryCta.href}
-            className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
+            className="group inline-flex items-center gap-2 lowercase text-sm text-foreground transition-colors hover:text-accent"
           >
             {hero.secondaryCta.label}
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <a
             href={hero.resumeCta.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 text-sm font-semibold text-muted transition-colors hover:border-accent hover:text-accent"
+            className="group inline-flex items-center gap-2 lowercase text-sm text-muted transition-colors hover:text-accent"
           >
-            <FileText className="h-4 w-4" />
-            {hero.resumeCta.label}
+            {hero.resumeCta.label.toLowerCase()}
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
 
-          <div className="flex items-center gap-1 sm:ml-2">
+          <span className="flex items-center gap-1">
             {socialLinks.map((social) => (
               <a
                 key={social.platform}
@@ -126,28 +114,14 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="rounded-md p-2.5 text-muted transition-all hover:-translate-y-0.5 hover:text-accent"
+                className="p-2 text-muted transition-colors hover:text-accent"
               >
-                <SocialIcon platform={social.platform} className="h-5 w-5" />
+                <SocialIcon platform={social.platform} className="h-4.5 w-4.5" />
               </a>
             ))}
-          </div>
+          </span>
         </motion.div>
       </motion.div>
-
-      <motion.a
-        href="#about"
-        aria-label="Scroll to about section"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-faint transition-colors hover:text-accent"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 8, 0] }}
-        transition={{
-          opacity: { delay: 1.4, duration: 0.6 },
-          y: { repeat: Infinity, duration: 2, ease: "easeInOut", delay: 1.4 },
-        }}
-      >
-        <ChevronDown className="h-6 w-6" />
-      </motion.a>
     </section>
   );
 }

@@ -13,11 +13,11 @@ export default function FAQ() {
   return (
     <Reveal>
       <div className="mt-20 border-t border-border pt-12">
-        <h3 className="mb-6 font-mono text-sm font-semibold lowercase text-accent">
+        <h3 className="mb-6 lowercase text-sm text-accent">
           {"// ask me anything"}
         </h3>
 
-        <div className="divide-y divide-border rounded-lg border border-border bg-surface/40">
+        <div className="divide-y divide-border border-y border-border">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
@@ -27,10 +27,10 @@ export default function FAQ() {
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   aria-expanded={isOpen}
                   aria-controls={`faq-panel-${i}`}
-                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-surface sm:px-6"
+                  className="flex w-full items-center justify-between gap-4 px-1 py-4 text-left transition-colors hover:bg-surface/40"
                 >
                   <span
-                    className={`font-mono text-sm lowercase transition-colors ${
+                    className={`lowercase text-sm transition-colors ${
                       isOpen ? "text-accent" : "text-foreground"
                     }`}
                   >
@@ -55,7 +55,7 @@ export default function FAQ() {
                       transition={{ duration: 0.25, ease: "easeOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="px-5 pb-5 text-sm leading-relaxed text-muted sm:px-6">
+                      <p className="px-1 pb-5 text-sm leading-relaxed text-muted">
                         {faq.answer}
                       </p>
                     </motion.div>

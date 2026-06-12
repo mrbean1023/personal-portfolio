@@ -2,39 +2,24 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Briefcase,
-  GitFork,
-  GraduationCap,
-  MapPin,
-  Users,
-  type LucideIcon,
-} from "lucide-react";
 import { about, timeline, type TimelineKind } from "@/data/portfolio";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 
 type Filter = TimelineKind | "all";
 
-const kindIcons: Record<TimelineKind, LucideIcon> = {
-  work: Briefcase,
-  education: GraduationCap,
-  leadership: Users,
-  "open-source": GitFork,
-};
-
 const kindLabels: Record<TimelineKind, string> = {
-  work: "Work",
-  education: "Education",
-  leadership: "Leadership",
-  "open-source": "Open Source",
+  work: "work",
+  education: "education",
+  leadership: "leadership",
+  "open-source": "open source",
 };
 
-// Filter pills are derived from the kinds actually present in the data,
+// Filter options are derived from the kinds actually present in the data,
 // so adding/removing timeline entries never leaves an empty filter.
 const presentKinds = Array.from(new Set(timeline.map((entry) => entry.kind)));
 const filters: { id: Filter; label: string }[] = [
-  { id: "all", label: "All" },
+  { id: "all", label: "all" },
   ...presentKinds.map((kind) => ({ id: kind as Filter, label: kindLabels[kind] })),
 ];
 
@@ -45,23 +30,21 @@ export default function Timeline() {
     filter === "all" ? timeline : timeline.filter((e) => e.kind === filter);
 
   return (
-    <section id="about" className="mx-auto max-w-6xl scroll-mt-20 px-6 py-24">
+    <section id="about" className="mx-auto max-w-5xl scroll-mt-20 px-6 py-20">
       <SectionHeading index="01" title={about.heading} />
 
       <Reveal>
-        <div className="mb-12 max-w-3xl space-y-4 text-muted">
+        <div className="mb-14 max-w-2xl space-y-4 text-sm leading-relaxed text-muted sm:text-base">
           {about.paragraphs.map((paragraph) => (
-            <p key={paragraph.slice(0, 32)} className="leading-relaxed">
-              {paragraph}
-            </p>
+            <p key={paragraph.slice(0, 32)}>{paragraph}</p>
           ))}
         </div>
       </Reveal>
 
-      {/* Filter pills */}
+      {/* Filter row — plain lowercase text links */}
       <Reveal>
         <div
-          className="mb-10 flex flex-wrap gap-2"
+          className="mb-2 flex flex-wrap gap-x-6 gap-y-2"
           role="tablist"
           aria-label="Filter timeline"
         >
@@ -72,10 +55,10 @@ export default function Timeline() {
               role="tab"
               aria-selected={filter === f.id}
               onClick={() => setFilter(f.id)}
-              className={`rounded-full border px-4 py-1.5 font-mono text-xs transition-colors ${
+              className={`lowercase text-xs transition-colors sm:text-sm ${
                 filter === f.id
-                  ? "border-accent bg-accent/10 text-accent"
-                  : "border-border text-muted hover:border-faint hover:text-foreground"
+                  ? "text-accent underline decoration-accent/60 underline-offset-8"
+                  : "text-faint hover:text-foreground"
               }`}
             >
               {f.label}
@@ -84,78 +67,55 @@ export default function Timeline() {
         </div>
       </Reveal>
 
-      {/* Timeline rail */}
-      <div className="relative ml-3 border-l border-border pl-8 sm:ml-5">
-        <AnimatePresence mode="popLayout">
-          {entries.map((entry) => {
-            const Icon = kindIcons[entry.kind];
-            return (
-              <motion.article
-                key={`${entry.organization}-${entry.period}`}
-                layout
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.3 }}
-                className="group relative pb-12 last:pb-0"
-              >
-                {/* Node on the rail */}
-                <span className="absolute -left-[45px] flex h-7 w-7 items-center justify-center rounded-full border border-border bg-surface transition-colors group-hover:border-accent sm:-left-[47px]">
-                  <Icon className="h-3.5 w-3.5 text-accent" />
-                </span>
+      {/* Flat editorial rows separated by hairlines */}
+      <AnimatePresence mode="popLayout">
+        {entries.map((entry) => (
+          <motion.article
+            key={`${entry.organization}-${entry.period}`}
+            layout
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="group grid gap-3 border-b border-border py-9 sm:grid-cols-[180px_1fr] sm:gap-8"
+          >
+            <div className="text-xs leading-relaxed text-faint">
+              <p>{entry.period}</p>
+              <p>{entry.location}</p>
+              <p className="mt-1 text-accent/80">[{kindLabels[entry.kind]}]</p>
+            </div>
 
-                <div className="rounded-lg border border-border bg-surface/50 p-6 transition-all duration-300 group-hover:-translate-y-1 group-hover:border-accent/40 group-hover:shadow-lg group-hover:shadow-accent/5">
-                  <div className="mb-1 flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <span className="font-mono text-xs text-accent">
-                      {entry.period}
+            <div>
+              <h3 className="lowercase text-base text-foreground transition-colors group-hover:text-accent sm:text-lg">
+                {entry.title}{" "}
+                <span className="text-muted">@ {entry.organization}</span>
+              </h3>
+
+              <p className="mt-3 text-sm leading-relaxed text-muted">
+                {entry.summary}
+              </p>
+
+              <ul className="mt-3 space-y-1.5">
+                {entry.highlights.map((highlight) => (
+                  <li
+                    key={highlight.slice(0, 32)}
+                    className="flex gap-2.5 text-sm leading-relaxed text-muted"
+                  >
+                    <span className="select-none text-accent" aria-hidden="true">
+                      ›
                     </span>
-                    <span className="rounded-full bg-surface-raised px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-faint">
-                      {kindLabels[entry.kind]}
-                    </span>
-                  </div>
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
 
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {entry.title}{" "}
-                    <span className="text-accent">@ {entry.organization}</span>
-                  </h3>
-
-                  <p className="mt-0.5 flex items-center gap-1.5 text-xs text-faint">
-                    <MapPin className="h-3 w-3" aria-hidden="true" />
-                    {entry.location}
-                  </p>
-
-                  <p className="mt-3 text-sm leading-relaxed text-muted">
-                    {entry.summary}
-                  </p>
-
-                  <ul className="mt-3 space-y-1.5">
-                    {entry.highlights.map((highlight) => (
-                      <li
-                        key={highlight.slice(0, 32)}
-                        className="flex gap-2 text-sm text-muted"
-                      >
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {entry.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded bg-accent/10 px-2 py-0.5 font-mono text-xs text-accent"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.article>
-            );
-          })}
-        </AnimatePresence>
-      </div>
+              <p className="mt-4 lowercase text-xs text-faint">
+                {entry.tags.join(" · ")}
+              </p>
+            </div>
+          </motion.article>
+        ))}
+      </AnimatePresence>
     </section>
   );
 }

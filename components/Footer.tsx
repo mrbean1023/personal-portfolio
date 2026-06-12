@@ -4,9 +4,9 @@ import SocialIcon from "@/components/SocialIcon";
 export default function Footer() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 py-10 sm:flex-row sm:justify-between">
-        <p className="font-mono text-xs text-faint">
-          {footer.note} · © {footer.year}
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-10 sm:flex-row sm:justify-between">
+        <p className="lowercase text-xs text-faint">
+          {footer.note.toLowerCase()} · © {footer.year}
         </p>
         <div className="flex items-center gap-1">
           {socialLinks.map((social) => (
