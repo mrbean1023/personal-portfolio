@@ -29,12 +29,14 @@ Every shape is strictly typed, so the compiler will catch mistakes (`npm run typ
 
 ### Theming
 
-The palette is defined once in [`app/globals.css`](app/globals.css) under `@theme`. To switch the accent from electric blue to emerald, change two lines:
+The palette is defined once in [`app/globals.css`](app/globals.css) under `@theme` — a warm dark charcoal with a caramel accent (matching anselmlong.com). To change the accent, edit two lines (any CSS colour works, e.g. emerald):
 
 ```css
 --color-accent: #10b981;
 --color-accent-soft: #047857;
 ```
+
+If you change the palette, also update the hardcoded hex values in `app/opengraph-image.tsx` and `app/icon.svg` to match.
 
 ## Contact form delivery
 

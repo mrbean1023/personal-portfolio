@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette — dark slate base with a single electric-blue accent */
-  --color-background: #0b0f19;
-  --color-surface: #111827;
-  --color-surface-raised: #161e2e;
-  --color-border: #1f2a3d;
-  --color-foreground: #e2e8f0;
-  --color-muted: #94a3b8;
-  --color-faint: #64748b;
-  --color-accent: #3b82f6;
-  --color-accent-soft: #1d4ed8;
+  /* Palette — warm dark charcoal with a caramel accent (anselmlong.com) */
+  --color-background: oklch(0.12 0.01 85);
+  --color-surface: oklch(0.16 0.01 85);
+  --color-surface-raised: oklch(0.2 0.01 85);
+  --color-border: oklch(0.25 0.01 85);
+  --color-foreground: oklch(0.88 0.01 85);
+  --color-muted: oklch(0.65 0.012 85);
+  --color-faint: oklch(0.52 0.012 85);
+  --color-accent: oklch(0.72 0.12 65);
+  --color-accent-soft: oklch(0.6 0.1 65);
 
   /* Monospace everywhere — editorial terminal aesthetic */
   --font-sans: var(--font-jetbrains-mono), ui-monospace, "Cascadia Code",
@@ -40,7 +40,7 @@ body {
 
 ::selection {
   background-color: var(--color-accent);
-  color: white;
+  color: var(--color-background);
 }
 
 /* Thin, dark scrollbar to match the theme */

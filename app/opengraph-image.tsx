@@ -17,9 +17,9 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          backgroundColor: "#0b0f19",
+          backgroundColor: "#171410",
           backgroundImage:
-            "radial-gradient(circle at 80% 10%, rgba(59,130,246,0.18), transparent 55%)",
+            "radial-gradient(circle at 80% 10%, rgba(196,149,106,0.16), transparent 55%)",
           fontFamily: "monospace",
         }}
       >
@@ -28,7 +28,7 @@ export default function OpenGraphImage() {
             display: "flex",
             alignItems: "center",
             gap: "12px",
-            color: "#3b82f6",
+            color: "#c4956a",
             fontSize: 28,
           }}
         >
@@ -37,20 +37,30 @@ export default function OpenGraphImage() {
         <div
           style={{
             marginTop: 24,
-            color: "#e2e8f0",
+            color: "#e3ddd1",
             fontSize: 84,
             fontWeight: 700,
             letterSpacing: "-2px",
             display: "flex",
+            alignItems: "center",
           }}
         >
-          {hero.name}
-          <span style={{ color: "#3b82f6" }}>.</span>
+          {hero.name.toLowerCase()}
+          {/* CSS-drawn terminal caret — emoji/symbol glyphs are unreliable in satori */}
+          <div
+            style={{
+              width: 30,
+              height: 64,
+              marginLeft: 20,
+              backgroundColor: "#c4956a",
+              display: "flex",
+            }}
+          />
         </div>
         <div
           style={{
             marginTop: 24,
-            color: "#94a3b8",
+            color: "#948c7e",
             fontSize: 32,
             maxWidth: 900,
             lineHeight: 1.4,
@@ -66,7 +76,7 @@ export default function OpenGraphImage() {
             display: "flex",
             alignItems: "center",
             gap: "16px",
-            color: "#64748b",
+            color: "#7d756a",
             fontSize: 24,
           }}
         >
@@ -74,7 +84,7 @@ export default function OpenGraphImage() {
             style={{
               width: 56,
               height: 2,
-              backgroundColor: "#3b82f6",
+              backgroundColor: "#c4956a",
               display: "flex",
             }}
           />
