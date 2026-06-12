@@ -86,6 +86,11 @@ export interface ContactContent {
   email: string;
 }
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface SiteMeta {
   title: string;
   description: string;
@@ -121,7 +126,8 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const hero: HeroContent = {
-  greeting: "Hi, my name is",
+  /** Rendered after a dynamic time-of-day prefix: "good evening, i'm" */
+  greeting: "i'm",
   name: "Andrew Neo",
   typedPhrases: [
     "I build full-stack web applications.",
@@ -134,6 +140,15 @@ export const hero: HeroContent = {
   primaryCta: { label: "View Projects", href: "#projects" },
   secondaryCta: { label: "Contact Me", href: "#contact" },
 };
+
+/** Phrases cycled in the scrolling ribbon below the hero */
+export const marqueeMotifs: string[] = [
+  "constantly learning",
+  "always shipping",
+  "never boring",
+  "obsessed with the details",
+  "type-safe by default",
+];
 
 export const about: AboutContent = {
   heading: "About & Experience",
@@ -381,6 +396,29 @@ export const contact: ContactContent = {
     "I'm open to interesting full-stack roles, consulting engagements and open-source collaboration. Drop me a message and I'll get back to you within a couple of days.",
   email: "andrewneo27@gmail.com",
 };
+
+export const faqs: FaqItem[] = [
+  {
+    question: "are you open to new opportunities?",
+    answer:
+      "Yes — I'm open to senior full-stack roles, contract work and interesting side collaborations. The fastest way to reach me is the form above or a direct email; I reply to everything within a couple of days.",
+  },
+  {
+    question: "what's your preferred stack?",
+    answer:
+      "TypeScript end to end: Next.js on the frontend, Node.js or Go services behind it, PostgreSQL for data, and infrastructure as code on AWS or Kubernetes. But I pick tools to fit the problem, not the other way around.",
+  },
+  {
+    question: "do you work with AI/LLM products?",
+    answer:
+      "Quite a bit — I've built prompt evaluation tooling (see PromptSmith above), retrieval pipelines with pgvector, and production integrations against the Claude API. I'm pragmatic about it: ship the boring reliable version first, then iterate.",
+  },
+  {
+    question: "can you help with an existing codebase, not a greenfield build?",
+    answer:
+      "Absolutely — most of my professional work has been evolving live systems: incremental migrations, performance work, observability and developer-experience improvements. I'm comfortable earning trust in a legacy codebase before changing it.",
+  },
+];
 
 export const footer = {
   note: "Designed & built by Andrew Neo",

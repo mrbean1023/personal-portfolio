@@ -64,13 +64,11 @@ export default function Navbar() {
               <li key={link.href} className="relative">
                 <Link
                   href={link.href}
-                  className={`block px-4 py-2 text-sm transition-colors ${
+                  className={`block px-4 py-2 font-mono text-sm lowercase transition-colors ${
                     isActive ? "text-accent" : "text-muted hover:text-foreground"
                   }`}
                 >
-                  <span className="mr-1 font-mono text-xs text-accent">
-                    0{i + 1}.
-                  </span>
+                  <span className="mr-1 text-xs text-accent">0{i + 1}.</span>
                   {link.label}
                 </Link>
                 {isActive && (
@@ -128,15 +126,13 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className={`block rounded-md px-3 py-3 text-base ${
+                    className={`block rounded-md px-3 py-3 font-mono text-base lowercase ${
                       activeId === link.href.replace("#", "")
                         ? "bg-surface text-accent"
                         : "text-muted hover:bg-surface hover:text-foreground"
                     }`}
                   >
-                    <span className="mr-2 font-mono text-sm text-accent">
-                      0{i + 1}.
-                    </span>
+                    <span className="mr-2 text-sm text-accent">0{i + 1}.</span>
                     {link.label}
                   </Link>
                 </motion.li>

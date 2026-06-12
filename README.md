@@ -22,6 +22,7 @@ No component changes are needed to:
 - Add/remove timeline entries — work, education or open-source (`timeline`)
 - Add/remove projects, including the modal's problem/architecture/results copy (`projects`)
 - Adjust skill categories and proficiency levels (`skillCategories`)
+- Change the scrolling ribbon phrases (`marqueeMotifs`) and the "ask me anything" entries (`faqs`)
 - Update social links, contact email and SEO metadata (`socialLinks`, `contact`, `siteMeta`)
 
 Every shape is strictly typed, so the compiler will catch mistakes (`npm run typecheck`).
@@ -82,7 +83,9 @@ app/
   api/contact/route.ts  # Serverless contact endpoint (Resend / log fallback)
 components/
   Navbar.tsx            # Sticky glassmorphism nav, scroll-spy, mobile menu
-  Hero.tsx              # Typing animation, CTAs, social links
+  Hero.tsx              # Time-of-day greeting, typing animation, CTAs
+  Marquee.tsx           # Infinite scrolling motif ribbon
+  FAQ.tsx               # "ask me anything" accordion
   Timeline.tsx          # Filterable work/education/OSS timeline
   Projects.tsx          # Project grid
   ProjectModal.tsx      # Case-study modal (problem / architecture / results)

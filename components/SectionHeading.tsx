@@ -10,8 +10,8 @@ export default function SectionHeading({ index, title }: SectionHeadingProps) {
   return (
     <Reveal>
       <div className="mb-10 flex items-center gap-4">
-        <h2 className="flex items-baseline gap-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-          <span className="font-mono text-base font-normal text-accent sm:text-lg">
+        <h2 className="flex items-baseline gap-3 font-mono text-2xl font-bold lowercase tracking-tight text-foreground sm:text-3xl">
+          <span className="text-base font-normal text-accent sm:text-lg">
             {index}.
           </span>
           {title}

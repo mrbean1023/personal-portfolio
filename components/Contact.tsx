@@ -7,6 +7,7 @@ import { CheckCircle2, Loader2, Mail, Send, TriangleAlert } from "lucide-react";
 import { contact } from "@/data/portfolio";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
+import FAQ from "@/components/FAQ";
 
 interface ContactFormValues {
   name: string;
@@ -222,6 +223,8 @@ export default function Contact() {
           </form>
         </Reveal>
       </div>
+
+      <FAQ />
     </section>
   );
 }

@@ -1,11 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { hero, socialLinks } from "@/data/portfolio";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import SocialIcon from "@/components/SocialIcon";
+
+/** "good morning" / "good afternoon" / "good evening" based on visitor time. */
+function timeGreeting(hour: number): string {
+  if (hour < 12) return "good morning";
+  if (hour < 18) return "good afternoon";
+  return "good evening";
+}
 
 const container = {
   hidden: {},
@@ -25,6 +33,13 @@ const item = {
 
 export default function Hero() {
   const typed = useTypewriter(hero.typedPhrases);
+  // Server renders a neutral "hello"; the client swaps in the local
+  // time-of-day greeting after mount to avoid a hydration mismatch.
+  const [greeting, setGreeting] = useState("hello");
+
+  useEffect(() => {
+    setGreeting(timeGreeting(new Date().getHours()));
+  }, []);
 
   return (
     <section
@@ -45,9 +60,9 @@ export default function Hero() {
       >
         <motion.p
           variants={item}
-          className="mb-4 font-mono text-sm text-accent sm:text-base"
+          className="mb-4 font-mono text-sm lowercase text-accent sm:text-base"
         >
-          {hero.greeting}
+          {greeting}, {hero.greeting}
         </motion.p>
 
         <motion.h1
