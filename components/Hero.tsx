@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, FileText } from "lucide-react";
 import { hero, socialLinks } from "@/data/portfolio";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import SocialIcon from "@/components/SocialIcon";
@@ -108,6 +108,15 @@ export default function Hero() {
           >
             {hero.secondaryCta.label}
           </Link>
+          <a
+            href={hero.resumeCta.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 text-sm font-semibold text-muted transition-colors hover:border-accent hover:text-accent"
+          >
+            <FileText className="h-4 w-4" />
+            {hero.resumeCta.label}
+          </a>
 
           <div className="flex items-center gap-1 sm:ml-2">
             {socialLinks.map((social) => (

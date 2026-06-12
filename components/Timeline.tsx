@@ -7,6 +7,7 @@ import {
   GitFork,
   GraduationCap,
   MapPin,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import { about, timeline, type TimelineKind } from "@/data/portfolio";
@@ -15,24 +16,27 @@ import Reveal from "@/components/Reveal";
 
 type Filter = TimelineKind | "all";
 
-const filters: { id: Filter; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "work", label: "Work" },
-  { id: "education", label: "Education" },
-  { id: "open-source", label: "Open Source" },
-];
-
 const kindIcons: Record<TimelineKind, LucideIcon> = {
   work: Briefcase,
   education: GraduationCap,
+  leadership: Users,
   "open-source": GitFork,
 };
 
 const kindLabels: Record<TimelineKind, string> = {
   work: "Work",
   education: "Education",
+  leadership: "Leadership",
   "open-source": "Open Source",
 };
+
+// Filter pills are derived from the kinds actually present in the data,
+// so adding/removing timeline entries never leaves an empty filter.
+const presentKinds = Array.from(new Set(timeline.map((entry) => entry.kind)));
+const filters: { id: Filter; label: string }[] = [
+  { id: "all", label: "All" },
+  ...presentKinds.map((kind) => ({ id: kind as Filter, label: kindLabels[kind] })),
+];
 
 export default function Timeline() {
   const [filter, setFilter] = useState<Filter>("all");

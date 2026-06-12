@@ -23,7 +23,7 @@ export interface NavLink {
   href: string;
 }
 
-export type TimelineKind = "work" | "education" | "open-source";
+export type TimelineKind = "work" | "education" | "leadership" | "open-source";
 
 export interface TimelineEntry {
   kind: TimelineKind;
@@ -66,6 +66,7 @@ export interface SkillCategory {
 }
 
 export interface HeroContent {
+  /** Rendered after a dynamic time-of-day prefix: "good evening, i'm" */
   greeting: string;
   name: string;
   /** Phrases cycled by the terminal-style typing animation */
@@ -73,6 +74,7 @@ export interface HeroContent {
   summary: string;
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
+  resumeCta: { label: string; href: string };
 }
 
 export interface AboutContent {
@@ -101,10 +103,10 @@ export interface SiteMeta {
 /* --------------------------------- Content -------------------------------- */
 
 export const siteMeta: SiteMeta = {
-  title: "Andrew Neo — Full-Stack Engineer",
+  title: "Andrew Neo — Computer Science @ NTU",
   description:
-    "Personal portfolio of Andrew Neo, a full-stack engineer building fast, reliable web applications and cloud-native systems.",
-  url: "https://andrewneo.dev",
+    "Personal portfolio of Andrew Neo, a Computer Science undergraduate at NTU Singapore with a fintech background — enterprise automation at MAS, Ethereum smart contracts, and full-stack web development.",
+  url: "https://personal-portfolio-tau-three-30.vercel.app",
   author: "Andrew Neo",
 };
 
@@ -115,30 +117,28 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "#contact" },
 ];
 
+/**
+ * Add your GitHub / LinkedIn here when ready, e.g.
+ * { platform: "github", label: "GitHub", href: "https://github.com/<username>" },
+ */
 export const socialLinks: SocialLink[] = [
-  { platform: "github", label: "GitHub", href: "https://github.com/andrewneo" },
-  {
-    platform: "linkedin",
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/andrewneo",
-  },
   { platform: "mail", label: "Email", href: "mailto:andrewneo27@gmail.com" },
 ];
 
 export const hero: HeroContent = {
-  /** Rendered after a dynamic time-of-day prefix: "good evening, i'm" */
   greeting: "i'm",
   name: "Andrew Neo",
   typedPhrases: [
     "I build full-stack web applications.",
-    "I design cloud-native architectures.",
-    "I ship pixel-perfect interfaces.",
-    "I automate everything that moves.",
+    "I automate enterprise workflows.",
+    "I ship Ethereum smart contracts.",
+    "I turn messy data into dashboards.",
   ],
   summary:
-    "Full-stack engineer focused on TypeScript, React and cloud infrastructure. I turn ambiguous product ideas into fast, accessible, production-grade software — and I sweat the details from database schema to the last CSS transition.",
+    "Computer Science undergraduate at Nanyang Technological University with a fintech diploma and real-world experience at the Monetary Authority of Singapore — where I built enterprise RPA pipelines and analytics dashboards. I like shipping things end to end, from smart contracts to this very website.",
   primaryCta: { label: "View Projects", href: "#projects" },
   secondaryCta: { label: "Contact Me", href: "#contact" },
+  resumeCta: { label: "Résumé", href: "/resume.pdf" },
 };
 
 /** Phrases cycled in the scrolling ribbon below the hero */
@@ -146,196 +146,192 @@ export const marqueeMotifs: string[] = [
   "constantly learning",
   "always shipping",
   "never boring",
-  "obsessed with the details",
-  "type-safe by default",
+  "fintech curious",
+  "automate everything",
 ];
 
 export const about: AboutContent = {
   heading: "About & Experience",
   paragraphs: [
-    "I'm a software engineer who enjoys working across the whole stack — shaping APIs and data models on the backend, then making the frontend feel effortless. My happy place is the intersection of developer experience, performance and clean design.",
-    "Outside of product work I contribute to open source, write about engineering practices, and tinker with home-lab infrastructure. Below is a snapshot of where I've worked, studied and contributed.",
+    "I'm a first-year Computer Science student at NTU Singapore, but my path here ran through fintech: a Diploma in Business & Financial Technology at Nanyang Polytechnic (Director's List, all five semesters), a year at the Monetary Authority of Singapore building robotic process automation, and a final-year project shipping a working Ethereum NFT marketplace.",
+    "Outside of code I've led student clubs and hackathon teams, and I unwind with guitar and piano, basketball, running, and a good book. Below is the timeline of where I've worked, studied and led.",
   ],
 };
 
 export const timeline: TimelineEntry[] = [
   {
-    kind: "work",
-    title: "Senior Full-Stack Engineer",
-    organization: "Nimbus Labs",
-    period: "2024 — Present",
-    location: "Singapore (Remote)",
-    summary:
-      "Lead engineer on the customer-facing analytics platform, owning architecture from the Postgres schema to the React design system.",
-    highlights: [
-      "Re-architected the dashboard rendering pipeline, cutting p95 page load from 4.2s to 1.1s.",
-      "Introduced trunk-based development and preview deployments, halving cycle time.",
-      "Mentor two junior engineers and run the frontend guild.",
-    ],
-    tags: ["TypeScript", "Next.js", "PostgreSQL", "AWS"],
-  },
-  {
-    kind: "work",
-    title: "Software Engineer",
-    organization: "Hyperdrive Commerce",
-    period: "2021 — 2024",
+    kind: "education",
+    title: "B.Comp. in Computer Science",
+    organization: "Nanyang Technological University",
+    period: "Aug 2025 — May 2029",
     location: "Singapore",
     summary:
-      "Built and operated high-traffic checkout and payment services for a regional e-commerce platform serving millions of monthly users.",
+      "Undergraduate Computer Science degree, currently in my first year.",
     highlights: [
-      "Designed an idempotent payment-orchestration service handling 2k+ TPS at peak.",
-      "Led the migration of five legacy PHP services to typed Node.js microservices.",
-      "On-call owner for checkout; drove incident MTTR down 40% with better runbooks.",
+      "Completed core modules: Introduction to Computational Thinking & Programming, Linear Algebra for Computing, Digital Logic, and Discrete Mathematics.",
     ],
-    tags: ["Node.js", "Go", "Kafka", "Kubernetes"],
+    tags: ["Computer Science", "Mathematics"],
   },
   {
-    kind: "open-source",
-    title: "Maintainer",
-    organization: "typed-env (OSS)",
-    period: "2022 — Present",
-    location: "GitHub",
+    kind: "work",
+    title: "Business Analyst / RPA Developer",
+    organization: "Monetary Authority of Singapore",
+    period: "Feb 2023 — May 2023",
+    location: "Singapore",
     summary:
-      "Maintain a zero-dependency TypeScript library for validating and typing environment variables at startup.",
+      "Continued from my internship into a business analyst role, bridging internal teams, vendors and management.",
     highlights: [
-      "Grew the project to 1.4k GitHub stars and ~80k monthly npm downloads.",
-      "Review community PRs and keep a 100%-typed, 100%-covered codebase.",
+      "Led Agile ceremonies as Scrum Master, coordinating daily stand-ups and sprint reviews across internal teams and external vendors.",
+      "Created and presented an interactive Tableau dashboard analysing full-year Service Desk performance, giving management live visibility into workload trends and operational KPIs.",
     ],
-    tags: ["TypeScript", "Open Source", "DX"],
+    tags: ["Agile", "Tableau", "Stakeholder Management"],
+  },
+  {
+    kind: "work",
+    title: "RPA Developer (Intern)",
+    organization: "Monetary Authority of Singapore",
+    period: "Aug 2022 — Feb 2023",
+    location: "Singapore",
+    summary:
+      "Built robotic process automation for Singapore's central bank in a regulated production environment.",
+    highlights: [
+      "Designed and deployed two enterprise RPA solutions using Blue Prism, automating workflows across DMS, Excel, Outlook and Skype for Business — saving 50+ hours annually.",
+      "Constructed end-to-end automation pipelines covering data cleansing, master file generation and scheduled email reporting, processing weekly datasets of 50+ records.",
+    ],
+    tags: ["Blue Prism", "RPA", "Excel VBA"],
+  },
+  {
+    kind: "leadership",
+    title: "Team Lead — PolyFinTech 100 API Hackathon",
+    organization: "Nanyang Polytechnic",
+    period: "2022",
+    location: "Singapore",
+    summary:
+      "Led a team representing Nanyang Polytechnic in Singapore's largest student fintech hackathon.",
+    highlights: [
+      "Advanced to the category finals against teams from polytechnics across Singapore.",
+    ],
+    tags: ["FinTech", "Hackathon", "Leadership"],
   },
   {
     kind: "education",
-    title: "B.Comp. in Computer Science",
-    organization: "National University of Singapore",
-    period: "2017 — 2021",
+    title: "Diploma in Business & Financial Technology (Merit)",
+    organization: "Nanyang Polytechnic",
+    period: "Apr 2019 — May 2023",
     location: "Singapore",
     summary:
-      "Focus area in software engineering and distributed systems; graduated with honours.",
+      "Fintech-focused diploma combining software engineering with business and financial domain knowledge.",
     highlights: [
-      "Teaching assistant for CS2103 Software Engineering for three semesters.",
-      "Final-year project: real-time collaborative code editor over CRDTs.",
+      "Achieved 9 Distinctions and 15 'A' grades; attained the Director's List (top 15% of cohort) in all 5 semesters.",
+      "Industry & leadership programmes: Splunk 2020, Capstone Leadership Development Programme, NYP Infosec May CTF 2021, IT Youth Council Digital Youth Ambassador 2021.",
     ],
-    tags: ["Distributed Systems", "Algorithms"],
+    tags: ["FinTech", "Software Engineering", "Director's List"],
+  },
+  {
+    kind: "leadership",
+    title: "Student Leader / Class Representative",
+    organization: "Nanyang Polytechnic — SIT Club EXCO",
+    period: "Apr 2019 — May 2023",
+    location: "Singapore",
+    summary:
+      "Served on the School of Information Technology club executive committee throughout my diploma.",
+    highlights: [
+      "Organised and executed 3+ student events, including NYP Open House for the School of Information Technology and other student engagement initiatives.",
+    ],
+    tags: ["Leadership", "Event Management"],
   },
 ];
 
 export const projects: Project[] = [
   {
-    slug: "fleetpulse",
-    title: "FleetPulse",
-    tagline: "Real-time logistics tracking dashboard",
+    slug: "nft-marketplace",
+    title: "NFT Marketplace",
+    tagline: "Full-stack Ethereum marketplace — NYP final-year project",
     description:
-      "A live operations dashboard that tracks 5,000+ delivery vehicles in real time with map clustering, alerting and replayable route history.",
+      "A working Ethereum NFT marketplace where 100+ NFTs were minted, listed, sold and auctioned via smart contracts, with MetaMask wallet authentication and real-time bidding.",
     problem:
-      "The logistics operator relied on hourly CSV exports to monitor its fleet, which meant dispatchers discovered delays and route deviations long after customers did. They needed second-level visibility without overwhelming the on-prem telemetry network.",
+      "Final-year academic project: build a production-style Web3 marketplace covering the full NFT lifecycle — not just minting, but listing, fixed-price sales, auctions and verifiable on-chain ownership — usable by people with a standard MetaMask wallet.",
     architecture:
-      "Vehicle telemetry flows through an MQTT broker into a Go ingestion service that batches and writes to TimescaleDB. A WebSocket gateway fans out deltas to the Next.js frontend, where MapLibre renders clustered markers with viewport-based subscription so the browser only receives data for visible vehicles. Route replay queries are served from continuous aggregates, keeping p95 under 120ms.",
+      "Smart contracts on Ethereum handle minting, listing, escrowed ETH payments and auction logic, with on-chain ownership validation as the source of truth. The web frontend integrates MetaMask for wallet authentication and transaction signing, and reflects bid activity in real time across 50+ concurrent listings.",
     results: [
-      "Dispatcher reaction time to route deviations dropped from ~45 minutes to under 30 seconds.",
-      "Handles 5,000 concurrent vehicle streams on two modest VMs.",
-      "Replay queries over 30 days of history return in <150ms.",
+      "100+ NFTs minted, listed, sold and auctioned end to end via smart contracts.",
+      "Real-time bidding delivered across 50+ listings.",
+      "Complete Web3 feature set: wallet auth, on-chain ownership validation and ETH payments.",
     ],
-    tech: ["Next.js", "TypeScript", "Go", "TimescaleDB", "WebSockets", "MapLibre"],
-    demoUrl: "https://fleetpulse-demo.vercel.app",
-    sourceUrl: "https://github.com/andrewneo/fleetpulse",
+    tech: ["Ethereum", "Smart Contracts", "JavaScript", "MetaMask", "Web3"],
     featured: true,
   },
   {
-    slug: "promptsmith",
-    title: "PromptSmith",
-    tagline: "LLM prompt evaluation & versioning platform",
+    slug: "car-services-b2b",
+    title: "B2B Car Services Platform",
+    tagline: "ASP.NET web application — NYP academic project",
     description:
-      "An internal tool for versioning prompts, running batched evaluations against multiple LLM providers, and diffing output quality across releases.",
+      "A C# ASP.NET B2B web application for a one-stop car services company: quotations, order tracking, invoicing and searchable transaction history over a 20+ table SQL Server database.",
     problem:
-      "Product teams were editing prompts directly in production code with no way to measure whether a change improved or degraded output quality. Regressions shipped silently and were only caught by user complaints.",
+      "A one-stop car services business needed its quotation, ordering and invoicing workflows digitised into a single B2B system, replacing manual processes with end-to-end traceable transactions.",
     architecture:
-      "Prompts are stored as versioned documents in Postgres with a content-addressed hash. An evaluation runner (Node.js worker pool) executes test suites against Anthropic and OpenAI APIs with concurrency control and exponential backoff, persisting graded results. The Next.js UI renders side-by-side diffs and score trends; grading combines deterministic assertions with model-graded rubrics.",
+      "Built on C# ASP.NET with SQL Server managing 20+ relational tables. Core business modules cover service quotation management, order status tracking, invoice generation and searchable transaction history, validated with 30+ simulated users across complete end-to-end workflows.",
     results: [
-      "Caught 12 prompt regressions pre-release in the first quarter of use.",
-      "Evaluation suites of 500 cases complete in under 4 minutes.",
-      "Adopted by three product teams as the standard prompt workflow.",
+      "Full quote-to-invoice business workflow implemented end to end.",
+      "20+ relational tables designed and managed in SQL Server.",
+      "Exercised by 30+ simulated users across complete workflows.",
     ],
-    tech: ["Next.js", "TypeScript", "PostgreSQL", "Claude API", "BullMQ", "Redis"],
-    sourceUrl: "https://github.com/andrewneo/promptsmith",
+    tech: ["C#", "ASP.NET", "SQL Server", "HTML/CSS", "JavaScript"],
     featured: true,
   },
   {
-    slug: "typed-env",
-    title: "typed-env",
-    tagline: "Type-safe environment variables for Node.js",
+    slug: "mas-rpa",
+    title: "Enterprise RPA Suite @ MAS",
+    tagline: "Blue Prism automation in a regulated environment",
     description:
-      "A zero-dependency library that validates process.env at startup and exposes a fully typed, frozen config object. 1.4k stars on GitHub.",
+      "Two enterprise RPA solutions deployed at the Monetary Authority of Singapore, automating document, spreadsheet and communication workflows and saving 50+ hours annually.",
     problem:
-      "Misconfigured environment variables are one of the most common causes of production incidents in Node.js services, and they typically fail deep inside business logic instead of at boot.",
+      "Teams at Singapore's central bank were spending hours each week on repetitive, error-prone workflows spanning the document management system, Excel, Outlook and Skype for Business — in an environment where mistakes carry regulatory weight.",
     architecture:
-      "A declarative schema builder generates both runtime validators and TypeScript types from a single definition, so the compile-time type and runtime check can never drift apart. Failures are aggregated into a single boot-time report. The library ships dual ESM/CJS builds with zero runtime dependencies and a 2kB footprint.",
+      "Blue Prism process objects orchestrate each system end to end: pipelines perform data cleansing, generate master files, and send scheduled email reports automatically. Built for a regulated production environment with controlled exception handling, processing weekly datasets of 50+ records.",
     results: [
-      "~80k monthly downloads on npm with 100% test coverage.",
-      "Adopted as the standard config layer at two previous employers.",
-      "Zero open bugs; median issue-to-close time under 5 days.",
+      "Two enterprise RPA solutions designed, built and deployed to production.",
+      "50+ hours of manual work eliminated annually.",
+      "Weekly datasets processed automatically with full auditability.",
     ],
-    tech: ["TypeScript", "Node.js", "Vitest", "tsup"],
-    demoUrl: "https://www.npmjs.com/package/typed-env",
-    sourceUrl: "https://github.com/andrewneo/typed-env",
+    tech: ["Blue Prism", "RPA", "Excel", "Outlook Automation"],
     featured: true,
   },
   {
-    slug: "shelfshare",
-    title: "ShelfShare",
-    tagline: "Community book-lending PWA",
+    slug: "service-desk-analytics",
+    title: "Service Desk Analytics Dashboard",
+    tagline: "Tableau KPI dashboard for management",
     description:
-      "A progressive web app that lets neighbourhood communities catalogue, lend and reserve books, with offline support and barcode scanning.",
+      "An interactive Tableau dashboard analysing a full year of Service Desk performance, presented to management for monitoring workload trends and operational KPIs.",
     problem:
-      "Local community libraries tracked loans in shared spreadsheets that constantly fell out of date, and members had no way to browse what was available without physically visiting.",
+      "Management had no consolidated view of Service Desk performance — workload distribution, resolution trends and operational KPIs lived in scattered exports, making capacity decisions guesswork.",
     architecture:
-      "A Next.js PWA with service-worker caching for full offline browsing. Book metadata is resolved from the OpenLibrary API via ISBN barcode scanning (WebRTC camera + ZXing). Loans are modelled as an append-only event log in Supabase, which makes the sync/conflict story trivial: clients replay events on reconnect. Push notifications remind borrowers of due dates.",
+      "A full year of Service Desk data was cleaned and modelled, then surfaced through an interactive Tableau dashboard with drill-downs by period, category and workload metrics. Designed around the questions management actually asks: who is loaded, what is trending, and where are the bottlenecks.",
     results: [
-      "Used by 4 community libraries managing ~3,200 books.",
-      "Offline-first design survives spotty connectivity at outdoor events.",
-      "Loan disputes dropped to zero thanks to the auditable event log.",
+      "Single live view replacing scattered manual reports.",
+      "Presented directly to management and adopted for KPI monitoring.",
+      "Enabled data-backed workload and capacity conversations.",
     ],
-    tech: ["Next.js", "Supabase", "PWA", "Tailwind CSS", "ZXing"],
-    demoUrl: "https://shelfshare-demo.vercel.app",
-    sourceUrl: "https://github.com/andrewneo/shelfshare",
+    tech: ["Tableau", "Data Analysis", "Excel"],
     featured: false,
   },
   {
-    slug: "homelab-iac",
-    title: "Homelab IaC",
-    tagline: "GitOps-managed home Kubernetes cluster",
+    slug: "portfolio-website",
+    title: "This Portfolio Website",
+    tagline: "Next.js 15 + TypeScript + Tailwind + Framer Motion",
     description:
-      "Infrastructure-as-code for a 3-node k3s cluster running self-hosted services, fully reconciled from Git with sealed secrets and automated backups.",
+      "The site you're looking at — a fully typed, single-page portfolio with a terminal-style hero, filterable timeline, case-study modals and a serverless contact form, deployed on Vercel.",
     problem:
-      "Self-hosted services tend to rot: undocumented manual tweaks accumulate until a disk failure means days of reconstruction from memory.",
+      "I wanted a portfolio that demonstrates the craft it describes: strict TypeScript, accessible interactions, honest performance — and content fully separated from layout so it stays effortless to update.",
     architecture:
-      "Three mini-PCs run k3s, bootstrapped by Ansible and reconciled by Flux CD from a public Git repository. Secrets are encrypted with SOPS/age so the repo stays public. Persistent volumes are backed up nightly to Backblaze B2 via Restic with verified restores. Monitoring is Prometheus + Grafana with alerting to a self-hosted ntfy instance.",
+      "Next.js 15 App Router with strict TypeScript throughout. All copy, projects and skills live in a single typed data file consumed by every section. Framer Motion drives scroll reveals, the case-study modal and the active-nav indicator; a Vercel serverless function with honeypot spam protection handles the contact form. Fully static-rendered home page at ~172 kB first-load JS.",
     results: [
-      "Full cluster rebuild from bare metal to all services in under 35 minutes.",
-      "14 self-hosted services with 99.7% measured uptime over a year.",
-      "Documentation-as-code: the repo is the runbook.",
+      "100% static home page with sub-second first paint on Vercel's edge.",
+      "Every word of content editable from one typed data file.",
+      "Respects prefers-reduced-motion across all animations.",
     ],
-    tech: ["Kubernetes", "Flux CD", "Ansible", "Terraform", "Prometheus"],
-    sourceUrl: "https://github.com/andrewneo/homelab",
-    featured: false,
-  },
-  {
-    slug: "lintwarden",
-    title: "LintWarden",
-    tagline: "GitHub App for incremental lint adoption",
-    description:
-      "A GitHub App that comments only on lint violations introduced by the current PR, letting large legacy codebases adopt strict rules incrementally.",
-    problem:
-      "Enabling strict lint rules on a legacy codebase produces thousands of pre-existing violations, so teams either fix nothing or drown in noise. CI that fails on old code blocks unrelated work.",
-    architecture:
-      "A Vercel serverless function receives GitHub webhooks, computes the diff range, and runs ESLint only on changed lines using a two-pass baseline comparison. Violations are posted as inline review comments via the Checks API with suggested fixes where auto-fixable. State is kept stateless — everything derives from the diff — so there is no database to operate.",
-    results: [
-      "Enabled strict TypeScript ESLint rules on a 400k-LOC codebase with zero big-bang migration.",
-      "New-code violation rate dropped 92% in three months.",
-      "Median webhook-to-comment latency of 9 seconds.",
-    ],
-    tech: ["Node.js", "GitHub API", "Vercel Functions", "ESLint"],
-    demoUrl: "https://github.com/marketplace",
-    sourceUrl: "https://github.com/andrewneo/lintwarden",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
+    demoUrl: "https://personal-portfolio-tau-three-30.vercel.app",
     featured: false,
   },
 ];
@@ -345,47 +341,42 @@ export const skillCategories: SkillCategory[] = [
     id: "languages",
     label: "Languages",
     skills: [
-      { name: "TypeScript", level: 95 },
-      { name: "JavaScript", level: 95 },
-      { name: "Go", level: 80 },
-      { name: "Python", level: 75 },
-      { name: "SQL", level: 85 },
-      { name: "Rust", level: 45 },
+      { name: "Python", level: 80 },
+      { name: "SQL", level: 80 },
+      { name: "C#", level: 75 },
+      { name: "JavaScript / TypeScript", level: 75 },
+      { name: "HTML5 / CSS3", level: 80 },
+      { name: "Excel VBA", level: 70 },
     ],
   },
   {
-    id: "frameworks",
-    label: "Frameworks",
+    id: "web",
+    label: "Web & Frameworks",
     skills: [
-      { name: "React / Next.js", level: 95 },
-      { name: "Node.js", level: 90 },
-      { name: "Tailwind CSS", level: 90 },
-      { name: "tRPC", level: 75 },
-      { name: "NestJS", level: 70 },
-      { name: "Framer Motion", level: 70 },
+      { name: "ASP.NET", level: 75 },
+      { name: "React / Next.js", level: 65 },
+      { name: "Tailwind CSS", level: 65 },
+      { name: "Node.js", level: 55 },
     ],
   },
   {
-    id: "cloud",
-    label: "Cloud / DevOps",
+    id: "data",
+    label: "Data & Automation",
     skills: [
-      { name: "AWS", level: 85 },
-      { name: "Kubernetes", level: 80 },
-      { name: "Terraform", level: 75 },
-      { name: "Docker", level: 90 },
-      { name: "PostgreSQL", level: 85 },
-      { name: "CI/CD (GitHub Actions)", level: 90 },
+      { name: "Blue Prism (RPA)", level: 85 },
+      { name: "Tableau", level: 80 },
+      { name: "SQL Server", level: 75 },
+      { name: "Excel / Data Cleansing", level: 85 },
     ],
   },
   {
-    id: "ai",
-    label: "AI / ML Tools",
+    id: "web3",
+    label: "FinTech / Web3",
     skills: [
-      { name: "Claude API", level: 85 },
-      { name: "LangChain", level: 65 },
-      { name: "Vector DBs (pgvector)", level: 70 },
-      { name: "Prompt Engineering", level: 85 },
-      { name: "PyTorch", level: 50 },
+      { name: "Smart Contracts", level: 65 },
+      { name: "Ethereum / Web3", level: 60 },
+      { name: "MetaMask Integration", level: 65 },
+      { name: "FinTech Domain Knowledge", level: 75 },
     ],
   },
 ];
@@ -393,30 +384,30 @@ export const skillCategories: SkillCategory[] = [
 export const contact: ContactContent = {
   heading: "Get In Touch",
   blurb:
-    "I'm open to interesting full-stack roles, consulting engagements and open-source collaboration. Drop me a message and I'll get back to you within a couple of days.",
+    "I'm open to internships, part-time engineering roles and interesting collaborations alongside my studies at NTU. Drop me a message and I'll get back to you within a couple of days — I reply to everything.",
   email: "andrewneo27@gmail.com",
 };
 
 export const faqs: FaqItem[] = [
   {
-    question: "are you open to new opportunities?",
+    question: "are you open to internships right now?",
     answer:
-      "Yes — I'm open to senior full-stack roles, contract work and interesting side collaborations. The fastest way to reach me is the form above or a direct email; I reply to everything within a couple of days.",
+      "Yes — I'm a first-year Computer Science student at NTU (graduating May 2029) looking for software engineering, data or fintech internships and part-time roles that fit around my studies. The form above or a direct email is the fastest way to reach me.",
+  },
+  {
+    question: "what did you actually do at MAS?",
+    answer:
+      "Over about a year at the Monetary Authority of Singapore I designed and deployed two enterprise Blue Prism RPA solutions automating workflows across the document management system, Excel, Outlook and Skype for Business — saving 50+ hours annually — then moved into a business analyst role where I ran Agile ceremonies as Scrum Master and built a Tableau dashboard senior management used to track Service Desk KPIs.",
   },
   {
     question: "what's your preferred stack?",
     answer:
-      "TypeScript end to end: Next.js on the frontend, Node.js or Go services behind it, PostgreSQL for data, and infrastructure as code on AWS or Kubernetes. But I pick tools to fit the problem, not the other way around.",
+      "I'm strongest in Python, C#/ASP.NET and SQL from my diploma and MAS work, and I'm actively levelling up modern web development — this site is Next.js, TypeScript and Tailwind, built end to end. I pick tools to fit the problem rather than the other way around.",
   },
   {
-    question: "do you work with AI/LLM products?",
+    question: "do you have web3 / fintech experience?",
     answer:
-      "Quite a bit — I've built prompt evaluation tooling (see PromptSmith above), retrieval pipelines with pgvector, and production integrations against the Claude API. I'm pragmatic about it: ship the boring reliable version first, then iterate.",
-  },
-  {
-    question: "can you help with an existing codebase, not a greenfield build?",
-    answer:
-      "Absolutely — most of my professional work has been evolving live systems: incremental migrations, performance work, observability and developer-experience improvements. I'm comfortable earning trust in a legacy codebase before changing it.",
+      "My diploma was in Business & Financial Technology, and my final-year project was a working Ethereum NFT marketplace — smart contracts, MetaMask wallet auth, ETH payments and real-time auctions across 50+ listings. I also led an NYP team to the category finals of the PolyFinTech 100 API Hackathon.",
   },
 ];
 

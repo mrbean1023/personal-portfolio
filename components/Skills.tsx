@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  BrainCircuit,
-  Cloud,
+  Blocks,
   Code2,
+  Database,
   LayoutTemplate,
   type LucideIcon,
 } from "lucide-react";
@@ -15,9 +15,9 @@ import Reveal from "@/components/Reveal";
 
 const categoryIcons: Record<string, LucideIcon> = {
   languages: Code2,
-  frameworks: LayoutTemplate,
-  cloud: Cloud,
-  ai: BrainCircuit,
+  web: LayoutTemplate,
+  data: Database,
+  web3: Blocks,
 };
 
 function proficiencyLabel(level: number): string {
