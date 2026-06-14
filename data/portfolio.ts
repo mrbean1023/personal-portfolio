@@ -117,11 +117,17 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "#contact" },
 ];
 
-/**
- * Add your GitHub / LinkedIn here when ready, e.g.
- * { platform: "github", label: "GitHub", href: "https://github.com/<username>" },
- */
 export const socialLinks: SocialLink[] = [
+  {
+    platform: "github",
+    label: "GitHub",
+    href: "https://github.com/mrbean1023",
+  },
+  {
+    platform: "linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/andrew-neo-ab1760229/",
+  },
   { platform: "mail", label: "Email", href: "mailto:andrewneo27@gmail.com" },
 ];
 
