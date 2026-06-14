@@ -6,6 +6,7 @@ import { projects, type Project } from "@/data/portfolio";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import ProjectModal from "@/components/ProjectModal";
+import ProjectCover from "@/components/ProjectCover";
 
 export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
@@ -58,28 +59,27 @@ export default function Projects() {
           {projects.map((project, i) => (
             <article
               key={project.slug}
-              className="group flex w-[19rem] shrink-0 snap-start flex-col border border-border bg-surface/30 p-6 transition-colors duration-300 hover:border-accent/50 sm:w-80"
+              className="group flex w-[19rem] shrink-0 snap-start flex-col overflow-hidden border border-border bg-surface/30 transition-colors duration-300 hover:border-accent/50 sm:w-80"
             >
-              <p className="text-xs text-faint">
-                {String(i + 1).padStart(2, "0")}
-              </p>
+              <ProjectCover project={project} index={i} />
 
-              <h3 className="mt-4 lowercase text-base text-foreground transition-colors group-hover:text-accent sm:text-lg">
-                {project.title}
-              </h3>
-              <p className="mt-1 lowercase text-xs text-faint">
-                {project.tagline}
-              </p>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="lowercase text-base text-foreground transition-colors group-hover:text-accent sm:text-lg">
+                  {project.title}
+                </h3>
+                <p className="mt-1 lowercase text-xs text-faint">
+                  {project.tagline}
+                </p>
 
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">
-                {project.description}
-              </p>
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">
+                  {project.description}
+                </p>
 
-              <p className="mt-5 lowercase text-xs leading-relaxed text-faint">
-                {project.tech.join(" · ")}
-              </p>
+                <p className="mt-5 lowercase text-xs leading-relaxed text-faint">
+                  {project.tech.join(" · ")}
+                </p>
 
-              <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
+                <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
                 <button
                   type="button"
                   onClick={() => setSelected(project)}
@@ -112,6 +112,7 @@ export default function Projects() {
                     </a>
                   )}
                 </span>
+                </div>
               </div>
             </article>
           ))}

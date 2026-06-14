@@ -50,6 +50,12 @@ export interface Project {
   tech: string[];
   demoUrl?: string;
   sourceUrl?: string;
+  /**
+   * Optional screenshot path under /public, e.g. "/projects/fleetpulse.png".
+   * When set, it replaces the generated cover art on the card. Drop real
+   * screenshots into public/projects/ and reference them here.
+   */
+  image?: string;
   featured: boolean;
 }
 
