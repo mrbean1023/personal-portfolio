@@ -21,10 +21,9 @@ export default function JsonLd() {
       name: entry.organization,
     }));
 
-  // Most recent education entry's title doubles as the headline job title.
-  const jobTitle =
-    timeline.find((entry) => entry.kind === "education")?.title ??
-    "Software Engineer";
+  // Professional title for search rich results. Kept explicit (rather than
+  // derived from a degree name) so it reads as a role, not a qualification.
+  const jobTitle = "Software Engineer";
 
   const knowsAbout = Array.from(
     new Set(
