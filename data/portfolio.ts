@@ -112,7 +112,7 @@ export const siteMeta: SiteMeta = {
   title: "Andrew Neo — Computer Science @ NTU",
   description:
     "Personal portfolio of Andrew Neo, a Computer Science undergraduate at NTU Singapore with a fintech background — enterprise automation at MAS, Ethereum smart contracts, and full-stack web development.",
-  url: "https://personal-portfolio-tau-three-30.vercel.app",
+  url: "https://andrewneo.dev",
   author: "Andrew Neo",
 };
 
