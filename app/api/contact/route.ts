@@ -63,7 +63,9 @@ export async function POST(request: Request) {
   }
 
   const { name, email, message } = payload;
-  const apiKey = process.env.RESEND_API_KEY;
+  // Trim to guard against trailing newlines/whitespace from how the secret
+  // was stored — a stray newline makes the Authorization header invalid.
+  const apiKey = process.env.RESEND_API_KEY?.trim();
 
   if (!apiKey) {
     // No email provider configured — log and accept so the form still works.
